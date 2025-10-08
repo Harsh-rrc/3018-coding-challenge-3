@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 
-// Simple fix - use require instead of import
+// Path to your service account key file
 const serviceAccount = require('./serviceAccountKey.json');
 
 // Initialize Firebase

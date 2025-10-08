@@ -1,2 +1,8 @@
-node_modules
-echo "serviceAccountKey.json" >> .gitignore
+# Firebase private keys
+*.json
+serviceAccountKey.json
+coding-challenge-3-7f7f6-firebase-adminsdk-fbsvc-6b336f54c2.json
+
+# Node.js
+node_modules/
+dist/
