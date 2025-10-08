@@ -1,5 +1,5 @@
 import { TaskService } from '../../src/api/v1/services/taskService';
-import { createDocument } from '../../src/repository/firestoreRepository';
+import { createDocument } from '../../src/api/v1/repositories/firestoreRepository';
 
 // Mock the database so we don't hit real Firestore
 jest.mock('../../src/repository/firestoreRepository');
@@ -12,6 +12,7 @@ describe('TaskService', () => {
         jest.clearAllMocks();
     });
 
+    // Test suite for createTask method
     describe('createTask', () => {
         it('should create a task successfully', async () => {
             // Test data
@@ -30,7 +31,7 @@ describe('TaskService', () => {
                 createdAt: new Date(),
                 updatedAt: new Date()
             };
-            
+
             (createDocument as jest.Mock).mockResolvedValue(mockCreatedTask);
 
             // Call the service

@@ -1,11 +1,10 @@
 import { Router } from 'express';
 import { createTask } from '../controllers/taskController';
-import { validateBody } from '../middlewares/validationMiddleware';
-import { createTaskSchema } from '../validations/taskValidation';
+import { validateBody } from '../middleware/validationMiddleware';
+import { createTaskSchema } from '../validations/taskValidations';
 
 const router = Router();
 
-// POST /api/v1/tasks - Create a new task
 // First validate the data, then create the task
 router.post('/', validateBody(createTaskSchema), createTask);
 

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { TaskService } from '../services/taskService';
-import { HTTP_STATUS } from '../../../constants/httpConstants';
+import { HTTP_STATUS } from '../constants/httpConstants';
 
 const taskService = new TaskService();
 

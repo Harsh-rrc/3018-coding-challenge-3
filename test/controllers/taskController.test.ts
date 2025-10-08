@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { createTask } from '../../src/api/v1/controllers/taskController';
 import { TaskService } from '../../src/api/v1/services/taskService';
+import { Task } from '../../src/api/v1/models/taskModel';
 
 // Mock the service
 jest.mock('../../src/api/v1/services/taskService');
@@ -15,6 +16,8 @@ const mockResponse = () => {
 };
 const mockNext = () => jest.fn();
 
+
+// Test suite for TaskController
 describe('TaskController', () => {
     let mockTaskService: jest.Mocked<TaskService>;
 
@@ -26,17 +29,24 @@ describe('TaskController', () => {
         (TaskService as jest.Mock).mockImplementation(() => mockTaskService);
     });
 
+    // Test for createTask controller
     describe('createTask', () => {
         it('should return 201 when task is created', async () => {
             const taskData = {
                 userId: 'user123',
                 title: 'Test Task',
-                priority: 'medium',
-                status: 'open',
+                priority: 'medium' as const,
+                status: 'open' as const,
                 dueDate: new Date('2024-12-31')
             };
 
-            const mockTask = { id: 'task123', ...taskData };
+            const mockTask: Task = {
+                id: 'task123',
+                ...taskData,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+
             const req = mockRequest(taskData) as Request;
             const res = mockResponse() as Response;
             const next = mockNext();

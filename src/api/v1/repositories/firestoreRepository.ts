@@ -1,4 +1,4 @@
-import { db } from '../config/firebaseConfig';
+import { db } from '../../../config/firebaseConfig';
 
 // This handles all database operations
 export const createDocument = async <T>(
@@ -10,6 +10,7 @@ export const createDocument = async <T>(
     const collectionRef = db.collection(collectionName);
     let docRef;
     
+    // If ID is provided, use it; otherwise, let Firestore generate one
     if (id) {
       docRef = collectionRef.doc(id);
       await docRef.set(data);
@@ -17,6 +18,7 @@ export const createDocument = async <T>(
       docRef = await collectionRef.add(data);
     }
     
+   // Retrieve the created document to return
     const snapshot = await docRef.get();
     return {
       id: docRef.id,
@@ -27,6 +29,3 @@ export const createDocument = async <T>(
     throw error;
   }
 };
-
-// Add other functions like getDocumentsByFieldValue, etc.
-// (Copy the full repository from our previous discussion)
